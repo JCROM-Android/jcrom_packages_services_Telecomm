@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -53,6 +54,8 @@ import android.widget.Toast;
  * just like it did pre-L.
  */
 public class CallActivity extends Activity {
+
+    private static final String VOICE_CAPABLE_PROPERTY = "persist.sys.voice.capable";
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -145,8 +148,9 @@ public class CallActivity extends Activity {
      * @return {@code True} if the device is voice-capable.
      */
     private boolean isVoiceCapable() {
-        return getApplicationContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_voice_capable);
+        //return getApplicationContext().getResources().getBoolean(
+        //        com.android.internal.R.bool.config_voice_capable);
+        return SystemProperties.getBoolean(VOICE_CAPABLE_PROPERTY, true);
     }
 
     /**
